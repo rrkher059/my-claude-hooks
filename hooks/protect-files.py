@@ -22,14 +22,22 @@ def main():
     except Exception:
         sys.exit(0)
 
-    target_path = data.get("tool_input", {}).get("path", "")
+    target_path = data.get("tool_input", {}).get("file_path", "")
     if not target_path:
         sys.exit(0)
 
-    basename = os.path.basename(target_path)
+    basename = os.path.basename(target_path).lower()
+    full_path_lower = target_path.lower()
+
+    if ".git/" in full_path_lower or full_path_lower.startswith(".git" + os.sep):
+        sys.stderr.write(f"BLOCKED: Protected file target '{target_path}' matches rule '.git/*'.\n")
+        sys.exit(2)
 
     for pattern in BLOCKED_PATTERNS:
-        if fnmatch.fnmatch(basename, pattern) or fnmatch.fnmatch(target_path, pattern) or ".git/" in target_path:
+        if pattern == ".git/*":
+            continue
+        pattern_lower = pattern.lower()
+        if fnmatch.fnmatch(basename, pattern_lower) or fnmatch.fnmatch(full_path_lower, pattern_lower):
             sys.stderr.write(f"BLOCKED: Protected file target '{target_path}' matches rule '{pattern}'.\n")
             sys.exit(2)
 

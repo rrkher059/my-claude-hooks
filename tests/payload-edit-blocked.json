@@ -1,0 +1,12 @@
+{
+  "session_id": "a1b2c3d4-5678-4e9f-8a1b-fedcba654321",
+  "transcript_path": "/home/rrkher059/.claude/projects/my-claude-hooks/a1b2c3d4-5678-4e9f-8a1b-fedcba654321.jsonl",
+  "cwd": "/home/rrkher059/my-claude-hooks",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": ".env",
+    "old_string": "API_KEY=old_value",
+    "new_string": "API_KEY=new_value"
+  }
+}
