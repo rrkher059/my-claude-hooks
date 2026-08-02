@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "command": "$CLAUDE_PROJECT_DIR/hooks/concise-prompt.sh"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "$CLAUDE_PROJECT_DIR/hooks/protect-files.py"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "$CLAUDE_PROJECT_DIR/hooks/auto-format.sh"
+      }
+    ]
+  }
+}
